@@ -1,0 +1,65 @@
+//count duplicates
+df.duplicated().sum()
+//view duplicate rows
+df[df.duplicated()]
+//drop duplicate rows
+df.drop_duplicates(inplace=True)
+
+//see whole dataframe
+pd.set_option('display.max_rows',None/500)
+
+//to detect outliers
+sns.boxplot(x='sex',y='chol',data=df)
+plt.title('cholestrol by gender')
+plt.xlabel('Gender')
+plt.ylabel('Cholestrol')
+plt.show()
+
+plt.hist(df['age'],bins=5,color='pink')
+plt.title('Age distribution')
+plt.xlabel('age')
+plt.ylabel('frequency')
+plt.show()
+
+plt.bar(df['sex'],df['output'])
+plt.title('gender vs heart disease')
+plt.xlabel('0=female, 1=male')
+plt.ylabel('output')
+plt.show()
+
+sns.scatterplot(data=df,x='age',y='chol',hue='sex',palette='Set2')
+plt.title('age vs chol')
+plt.xlabel('Age')
+plt.ylabel('Chol')
+plt.legend(title='Sex')
+plt.show()
+
+//sorting values
+sort_values=df.sort_values('like',ascending=False)
+sort_values
+
+//reshape
+reshaping=pd.pivot_table(df,index=['Type','Category'],values='like')
+reshaping
+
+reshape_arr=np.array([1,2,3,4,5,6])
+reshape_arr.reshape(3,2)
+
+//dataset and merging
+ds2=df[['Category','Post Month','Paid']].loc[0:5]
+ds2
+merging=pd.concat([ds1,ds2])
+merging
+
+//model building
+from sklearn.model_selection import train_test_split
+len(df)
+train,test=train_test_split(df,test_size=0.20)
+
+
+//for data transformayion
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+columns_to_scale = ['age', 'chol']
+df[columns_to_scale] = scaler.fit_transform(df[columns_to_scale])
+print(df.head())
